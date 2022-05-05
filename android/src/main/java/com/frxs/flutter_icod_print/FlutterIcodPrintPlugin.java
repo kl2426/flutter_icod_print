@@ -4,6 +4,11 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.frxs.flutter_icod_print.utils.PrinterUtils;
+import com.frxs.flutter_icod_print.utils.StatusDescribe;
+
+import java.io.UnsupportedEncodingException;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -11,8 +16,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
 
-import com.frxs.flutter_icod_print.utils.PrinterUtils;
-import com.frxs.flutter_icod_print.utils.StatusDescribe;
 import com.icod.serial.SerialPortFinder;
 import com.szsicod.print.escpos.PrinterAPI;
 import com.szsicod.print.io.BluetoothAPI;
@@ -120,10 +123,10 @@ public class FlutterIcodPrintPlugin implements FlutterPlugin, MethodCallHandler 
     } else if (call.method.equals("cut")) {
       if (mPrinter.isConnect()) {
         String type = call.argument("type");
-        if (type.equals("halfCut")) {
+        if (type.equals("CutType.halfCut")) {
           //  半切
           mPrinter.cutPaper(66, 50);
-        } else if (type.equals("allCut")) {
+        } else if (type.equals("CutType.allCut")) {
           //  全切
           mPrinter.cutPaper(65, 50);
         } else {

@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 class FlutterIcodPrint {
   static const MethodChannel _channel = MethodChannel('flutter_icod_print');
 
-  static Future<String?> get platformVersion async {
-    final String? version = await _channel.invokeMethod('getPlatformVersion');
+  static Future<String> get platformVersion async {
+    final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
@@ -30,12 +30,12 @@ class FlutterIcodPrint {
     final bool bol = await _channel.invokeMethod('closeUsb');
     return bol;
   }
-/// 查询连接状态
+  /// 查询连接状态
   static Future<DeviceStatusModel> getStatus() async {
     final String stateStr = await _channel.invokeMethod('getStatus');
     return DeviceStatusModel.fromJson(jsonDecode(stateStr));
   }
-/// 打印文本
+  /// 打印文本
   static Future<bool> print() async {
     final bool bol = await _channel.invokeMethod('print');
     return bol;
@@ -43,7 +43,7 @@ class FlutterIcodPrint {
 
   /// 切纸
   static Future<bool> cut(CutType type) async {
-    final bool bol = await _channel.invokeMethod('cut', {"type": type.name});
+    final bool bol = await _channel.invokeMethod('cut', {"type": type.toString()});
     return bol;
   }
 }
