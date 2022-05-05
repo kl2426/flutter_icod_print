@@ -102,17 +102,13 @@ public class FlutterIcodPrintPlugin implements FlutterPlugin, MethodCallHandler 
       if (mPrinter.isConnect()) {
         try {
           // 打印方法：printString
-          // 打印例范文本
-          String str = "Hello world!!\n";
-          int ret = mPrinter.printString(str, "UTF-8", false);
-//                        // 打印商品模板
-          mPrinter.printString(PrinterUtils.commodity80Print("商品名称","单价","数量","小计"), "UTF-8", false);
-          mPrinter.printString(PrinterUtils.commodity80Print("我是一个商品名称1","0.55","1","8.33"), "UTF-8", false);
-          mPrinter.printString(PrinterUtils.commodity80Print("我是一个商品名称1我是一个商品名称1","59.55","1","10.33"), "UTF-8", false);
-          mPrinter.printString(PrinterUtils.commodity80Print("我是一个商品名称1我是一个商品名称1我是一个商品名称1","888.55","1","888.33"), "UTF-8", false);
-          mPrinter.printString(PrinterUtils.commodity80Print("我是一个商品名称1我是一个商品名称1我是一个商品名称1我是一个商品名称1","8888.55","1","8888.33"), "UTF-8", false);
-          mPrinter.printString(PrinterUtils.commodity80Print("我是一个商品名称1我是一个商品名称1我是一个商品名称1我是一个商品名称1","88888.55","1","88888.33"), "UTF-8", false);
-          result.success(true);
+          String text = call.argument("text");
+          int ret = mPrinter.printString(text, "UTF-8", false);
+          if (ret == 0) {
+            result.success(true);
+          } else {
+            result.success(false);
+          }
         } catch (UnsupportedEncodingException e) {
 //          e.printStackTrace();
           result.success(false);
@@ -126,13 +122,14 @@ public class FlutterIcodPrintPlugin implements FlutterPlugin, MethodCallHandler 
         if (type.equals("CutType.halfCut")) {
           //  半切
           mPrinter.cutPaper(66, 50);
+          result.success(true);
         } else if (type.equals("CutType.allCut")) {
           //  全切
           mPrinter.cutPaper(65, 50);
+          result.success(true);
         } else {
           result.success(false);
         }
-        result.success(true);
       } else {
         result.success(false);
       }

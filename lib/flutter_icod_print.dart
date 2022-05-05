@@ -36,8 +36,8 @@ class FlutterIcodPrint {
     return DeviceStatusModel.fromJson(jsonDecode(stateStr));
   }
   /// 打印文本
-  static Future<bool> print() async {
-    final bool bol = await _channel.invokeMethod('print');
+  static Future<bool> print(String text) async {
+    final bool bol = await _channel.invokeMethod('print', {"text": text});
     return bol;
   }
 
