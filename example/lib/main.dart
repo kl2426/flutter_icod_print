@@ -82,7 +82,9 @@ class _MyAppState extends State<MyApp> {
 
             }, child: const Text("查询状态"),),
             MaterialButton(onPressed: () async {
-              bool bol = await FlutterIcodPrint.print();
+              bool bol = await FlutterIcodPrint.print('打印\n');
+              await FlutterIcodPrint.print('String Print \n');
+
               setState(() {
                 _platformVersion = '${bol}';
               });

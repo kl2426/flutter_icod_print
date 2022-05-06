@@ -97,13 +97,13 @@ public class FlutterIcodPrintPlugin implements FlutterPlugin, MethodCallHandler 
         status = mPrinter.getStatus();
         stateStr = StatusDescribe.getStatusDescribe(status);
       }
-      result.success(String.format("{\"status\": %s, \"msg\": %s}",status,stateStr));
+      result.success(String.format("{\"status\": %s, \"msg\": \"%s\"}",status,stateStr));
     } else if (call.method.equals("print")) {
       if (mPrinter.isConnect()) {
         try {
           // 打印方法：printString
           String text = call.argument("text");
-          int ret = mPrinter.printString(text, "UTF-8", false);
+          int ret = mPrinter.printString(text, "gbk", false);
           if (ret == 0) {
             result.success(true);
           } else {

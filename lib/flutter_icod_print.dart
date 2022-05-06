@@ -61,7 +61,7 @@ class DeviceStatusModel {
 
   DeviceStatusModel.fromJson(Map<String, dynamic> json) {
     this.status = json["status"] != null ? int.parse(json["status"].toString()) : null;
-    this.msg = json["msg"];
+    this.msg = json["msg"] != null ? json["msg"].toString() : null;
   }
 
   Map<String, dynamic> toJson() {
